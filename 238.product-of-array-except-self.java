@@ -6,9 +6,6 @@
 
 // @lc code=start
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
     public int calculateSuf(int start, int end, int[] nums) {
         int res = 1;
