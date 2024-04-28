@@ -7,32 +7,22 @@
 // @lc code=start
 
 class Solution {
-    public int calculateSuf(int start, int end, int[] nums) {
-        int res = 1;
-        for (int i = start; i <= end; i++) {
-            res *= nums[i];
-        }
-        return res;
-    }
-
-    public int calculatePre(int start, int end, int[] nums) {
-        int res = 1;
-        for (int i = start; i >= end; i--) {
-            res *= nums[i];
-        }
-        return res;
-    }
-
     public int[] productExceptSelf(int[] nums) {
-        int suf, pre = 1;
-        int[] res = new int[nums.length];
-        for (int j = 0; j < nums.length; j++) {
-            suf = calculateSuf(j + 1, nums.length - 1, nums);
-            pre = calculatePre(j - 1, 0, nums);
-            res[j] = suf * pre;
+        int n = nums.length;
+        int[] res = new int[n];
+        int pre[] = new int[n];
+        int suf[] = new int[n];
+        suf[n - 1] = 1;
+        pre[0] = 1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            suf[i] = suf[i + 1] * nums[i + 1];
         }
-        for (int i : res)
-            System.out.println(i);
+        for (int i = 1; i < nums.length; i++) {
+            pre[i] = pre[i - 1] * nums[i - 1];
+        }
+        for (int j = 0; j < nums.length; j++) {
+            res[j] = suf[j] * pre[j];
+        }
         return res;
     }
 }
