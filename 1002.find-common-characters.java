@@ -12,21 +12,23 @@ import java.util.List;
 
 class Solution {
     public List<String> commonChars(String[] words) {
-        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-        List<String> res = new ArrayList<String>();
-        int n = words.length;
-        for (int i = 0; i < n; i++) {
-            int m = words[i].length();
-            for (int j = 0; j < m; j++) {
-                map.put(words[i].charAt(j), map.getOrDefault(words[i].charAt(j), 0) + 1);
+        List<String> res = new ArrayList<>();
+        for (char c = 'a'; c <= 'z'; c++) {
+            int minCount = Integer.MAX_VALUE;
+            for (String word : words) {
+                int count = 0;
+                for (char ch : word.toCharArray()) {
+                    if (ch == c) {
+                        count++;
+                    }
+                }
+                minCount = Math.min(count, minCount);
+                if (minCount == 0) {
+                    break;
+                }
             }
-        }
-        for (char i : map.keySet()) {
-            if (map.get(i) >= 2 * n) {
-                res.add(String.valueOf(i));
-                res.add(String.valueOf(i));
-            } else if (map.get(i) >= n) {
-                res.add(String.valueOf(i));
+            for (int i = 0; i < minCount; i++) {
+                res.add(String.valueOf(c));
             }
         }
         return res;
