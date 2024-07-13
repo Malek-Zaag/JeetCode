@@ -1,6 +1,5 @@
 commit:
-	git add .
-	git commit -m "$(msg)"
+	git commit -am "$(msg)"
 	git push -u origin main
 
 
